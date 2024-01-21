@@ -1,3 +1,4 @@
+//Requiring of packages
 const express = require("express");
 const app = express();
 
@@ -21,31 +22,16 @@ async function hashPassword(password) {
     throw error;
   }
 }
-const newExpenses = await prisma.expenses.create({
-  data: {
-    name: "Note Book",
-  },
-});
-const expenses = await prisma.expenses.findOne({
-  where: {
-    id: 1,
-  },
-});
-console.log(expenses);
-const updatedExpenses = await prisma.expenses.update({
-  where: {
-    id: 1,
-  },
-  data: {
-    name: "Updated Expenses",
-  },
-});
-const deletedExpenses = await prisma.expenses.delete({
-  where: {
-    id: 1,
-  },
+
+app.get("/", (req, res, next) => {
+  res.json({
+    message: "Hi, welcome to my expenses app",
+  });
 });
 
+app.use(appRouter);
+
+// This is where we listen to our server
 app.listen(PORT, () => {
   console.log(`Server is runing on port ${PORT}`);
 });
