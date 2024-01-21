@@ -21,6 +21,30 @@ async function hashPassword(password) {
     throw error;
   }
 }
+const newExpenses = await prisma.expenses.create({
+  data: {
+    name: "Note Book",
+  },
+});
+const expenses = await prisma.expenses.findOne({
+  where: {
+    id: 1,
+  },
+});
+console.log(expenses);
+const updatedExpenses = await prisma.expenses.update({
+  where: {
+    id: 1,
+  },
+  data: {
+    name: "Updated Expenses",
+  },
+});
+const deletedExpenses = await prisma.expenses.delete({
+  where: {
+    id: 1,
+  },
+});
 
 app.listen(PORT, () => {
   console.log(`Server is runing on port ${PORT}`);
